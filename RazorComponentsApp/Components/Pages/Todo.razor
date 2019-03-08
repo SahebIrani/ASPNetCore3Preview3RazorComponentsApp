@@ -1,0 +1,51 @@
+﻿@page "/todo"
+
+@using RazorComponentsApp.Services
+
+@*<h1 class="h1 text-capitalize">Todo</h1>*@
+<h1>Todo (@todos.Count(todo => !todo.IsDone))</h1>
+
+<article class="row p-2">
+    <article class="col-12 col-lg-6 m-auto border rounded">
+        <section class="mt-2">
+            <input class="form-control bg-light text-dark border-0 h2 text-center" disabled placeholder="Something todo" bind="@validation" />
+            <ul class="list-group list-group-flush text-center text-light">
+                @foreach (var todo in todos)
+                {
+                    <li class="list-group-flush list-group-item list-group-item-action">
+                        <input class="form-check-input form-check-inline" type="checkbox" bind="@todo.IsDone" />
+                        <span class="pl-2">@todo.Title</span>
+                        @*<span class="oi oi-chevron-left text-secondary mt-1" aria-hidden="true"></span>*@
+                    </li>
+                    @*<li>
+                            <input type="checkbox" bind="@todo.IsDone" />
+                            <input bind="@todo.Title" />
+                        </li>*@
+                }
+            </ul>
+        </section>
+        <section class="my-2 mt-4 p-2 border rounded">
+            <input class="form-control" placeholder="Something todo" bind="@newTodo" />
+            <button class="btn btn-success mt-2" onclick="@AddTodo">Add todo</button>
+        </section>
+    </article>
+</article>
+
+@functions {
+    IList<TodoItem> todos = new List<TodoItem>();
+    string newTodo;
+    string validation;
+    void AddTodo()
+    {
+        if (!string.IsNullOrWhiteSpace(newTodo))
+        {
+            validation = $"add \"{newTodo}\" in TodoItem .. !!!!";
+            todos.Add(new TodoItem { Title = newTodo });
+            newTodo = string.Empty;
+        }
+        else
+        {
+            validation = "Please Enter Something todo .. !!!!";
+        }
+    }
+}

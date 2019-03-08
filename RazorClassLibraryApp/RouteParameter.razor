@@ -1,0 +1,12 @@
+﻿@*@page "/BlazorRoute"*@
+@*@page "/DifferentBlazorRoute"*@
+
+@page "/RouteParameter"
+@page "/RouteParameter/{text}"
+
+<h1>Blazor is @Text!</h1>
+
+@functions {
+    [Parameter]
+    private string Text { get; set; } = "fantastic";
+}

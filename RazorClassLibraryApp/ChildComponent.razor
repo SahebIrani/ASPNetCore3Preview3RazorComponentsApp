@@ -1,0 +1,22 @@
+﻿@*<div class="panel panel-success">
+        <div class="panel-heading">@Title</div>
+        <div class="panel-body">@ChildContent</div>
+    </div>
+
+    @functions {
+        [Parameter] private string Title { get; set; }
+        [Parameter] private RenderFragment ChildContent { get; set; }
+    }*@
+
+
+<h2>Child Component</h2>
+
+<p>Year: @Year</p>
+
+@functions {
+    [Parameter]
+    private int Year { get; set; }
+
+    [Parameter]
+    private Action<int> YearChanged { get; set; }
+}

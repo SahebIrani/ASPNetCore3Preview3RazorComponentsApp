@@ -1,0 +1,155 @@
+﻿@page "/"
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+@*<Counter />*@
+<Counter IncrementAmount="50" />
+
+
+@* from RazorClassLybraryApp *@
+@addTagHelper *, RazorClassLibraryApp
+<HeadingComponent />
+
+<ParentComponent />
+
+
+
+@*<input type="checkbox" class="form-check-input" id="italicsCheck"
+             bind="@_italicsCheck" />
+
+    <input value="@CurrentValue"
+           onchange="@((UIChangeEventArgs __e) => CurrentValue = __e.Value)" />
+
+    <input type="text" bind-value-oninput="@CurrentValue" />*@
+
+@*onchange*@
+
+<input bind="@StartDate" format-value="yyyy-MM-dd" />
+
+@functions {
+    [Parameter] private DateTime StartDate { get; set; } = new DateTime(2020, 1, 1);
+}
+
+
+<button class="btn btn-primary" onclick="@UpdateHeading">
+    Update heading
+</button>
+
+<input type="checkbox" class="form-check-input" onchange="@CheckboxChanged" />
+
+@functions {
+    void UpdateHeading(UIMouseEventArgs e)
+    {
+    }
+    void CheckboxChanged()
+    {
+    }
+    async Task UpdateHeading2(UIMouseEventArgs e)
+    {
+    }
+}
+
+<button onclick="@(e => Console.WriteLine("Hello, world!"))">Say hello</button>
+
+<h2>@message</h2>
+
+@for (var i = 1; i < 4; i++)
+{
+    var buttonNumber = i;
+
+    <button class="btn btn-primary"
+            onclick="@(e => UpdateHeading(e, buttonNumber))">
+        Button #@i
+    </button>
+}
+
+@functions {
+    string message = "Select a button to learn its position.";
+
+    void UpdateHeading(UIMouseEventArgs e, int buttonNumber)
+    {
+        message = $"You selected Button #{buttonNumber} at " +
+            "mouse position: {e.ClientX} X {e.ClientY}.";
+    }
+}
+
+
+@*<MyLoginDialog ref="loginDialog" />
+
+    @functions {
+        MyLoginDialog loginDialog;
+
+        void OnSomething()
+        {
+            loginDialog.Show();
+        }
+    }*@
+
+
+@functions  {
+    protected override async Task OnInitAsync()
+    {
+        //await ...
+    }
+
+    protected override void OnInit()
+    {
+        //...
+    }
+
+    //OnParametersSetAsync
+    //OnParametersSet
+    //OnAfterRenderAsync
+    //OnAfterRender
+
+    //public override void SetParameters(ParameterCollection parameters)
+    //{
+    //    base.SetParameters(parameters);
+    //}
+
+    protected override bool ShouldRender()
+    {
+        var renderUI = true;
+
+        return renderUI;
+    }
+}
+
+@using System
+@implements IDisposable
+
+@functions {
+    public void Dispose()
+    {
+    }
+}
+
+
+@*Razor directives*@
+@*@functions
+    @implements
+    @inherits
+    @inject
+    @layout
+    @page
+    @using
+    @addTagHelper*@
+
+
+<input type="checkbox" checked="@IsCompletedd" />
+@functions {
+    [Parameter]
+    private bool IsCompletedd { get; set; }
+}
+
+<input type="checkbox" checked />          @*true*@
+<input type="checkbox" />                  @*false*@
+
+
+@((MarkupString)myMarkup)
+@functions {
+    string myMarkup = "<p class='markup'>This is a <em>markup string</em>.</p>";
+}
+

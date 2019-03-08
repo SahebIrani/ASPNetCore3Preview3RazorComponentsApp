@@ -1,0 +1,28 @@
+﻿@typeparam TItem
+
+<ul>
+    @foreach (var item in Items)
+    {
+    @ItemTemplate(item)
+    }
+</ul>
+
+@functions {
+    [Parameter] RenderFragment<TItem>
+    ItemTemplate { get; set; }
+    [Parameter] IReadOnlyList<TItem>
+        Items { get; set; }
+        }
+
+
+        @*<ListViewTemplate Items="@pets">
+            <ItemTemplate Context="pet">
+                <li>@pet.Name</li>
+            </ItemTemplate>
+        </ListViewTemplate>
+
+        <ListViewTemplate Items="@pets" TItem="Pet">
+            <ItemTemplate Context="pet">
+                <li>@pet.Name</li>
+            </ItemTemplate>
+        </ListViewTemplate>*@

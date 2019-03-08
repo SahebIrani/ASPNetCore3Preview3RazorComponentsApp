@@ -1,0 +1,66 @@
+﻿@typeparam TItem
+
+<table class="table">
+    <thead>
+        <tr>@TableHeader</tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Items)
+        {
+        <tr>@RowTemplate(item)</tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>@TableFooter</tr>
+    </tfoot>
+</table>
+
+@functions {
+    [Parameter] RenderFragment TableHeader { get; set; }
+    [Parameter]
+    RenderFragment<TItem>
+    RowTemplate
+    { get; set; }
+    [Parameter] RenderFragment TableFooter { get; set; }
+    [Parameter]
+    IReadOnlyList<TItem>
+        Items
+        { get; set; }
+        }
+
+
+        @*<TableTemplate Items="@pets">
+            <TableHeader>
+                <th>ID</th>
+                <th>Name</th>
+            </TableHeader>
+            <RowTemplate>
+                <td>@context.PetId</td>
+                <td>@context.Name</td>
+            </RowTemplate>
+        </TableTemplate>*@
+
+        @*<TableTemplate Items="@pets">
+            <TableHeader>
+                <th>ID</th>
+                <th>Name</th>
+            </TableHeader>
+            <RowTemplate Context="pet">
+                <td>@pet.PetId</td>
+                <td>@pet.Name</td>
+            </RowTemplate>
+        </TableTemplate>*@
+
+
+        @*<TableTemplate Items="@pets" Context="pet">
+            <TableHeader>
+                <th>ID</th>
+                <th>Name</th>
+            </TableHeader>
+            <RowTemplate>
+                <td>@pet.PetId</td>
+                <td>@pet.Name</td>
+            </RowTemplate>
+        </TableTemplate>*@
+
+
